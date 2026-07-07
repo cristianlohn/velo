@@ -39,7 +39,7 @@ const colorLabels: Record<ExteriorColor, string> = {
 const statusBadgeClasses: Record<Order['status'], string> = {
   APROVADO: 'bg-green-100 text-green-700',
   REPROVADO: 'bg-red-100 text-red-700',
-  EM_ANALISE: 'bg-ambar-100 text-ambar-700',
+  EM_ANALISE: 'bg-amber-100 text-amber-700',
 };
 
 const OrderLookup = () => {
@@ -89,7 +89,7 @@ const OrderLookup = () => {
           <CardContent>
             <form onSubmit={handleSearch} className="space-y-4">
               <div>
-                <Label htmlFor="order-id">Código do Pedido</Label>
+                <Label htmlFor="order-id">Número do Pedido</Label>
                 <Input
                   id="order-id"
                   data-testid="search-order-id"

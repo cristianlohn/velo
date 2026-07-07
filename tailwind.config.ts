@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 export default {
   darkMode: ["class"],
@@ -63,6 +64,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        ambar: colors.amber,
         // Car color swatches
         glacier: "hsl(var(--glacier-blue))",
         midnight: "hsl(var(--midnight-back))",

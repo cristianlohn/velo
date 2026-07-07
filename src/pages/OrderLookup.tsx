@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Package, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { Search, Package, CheckCircle, XCircle, Clock, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -34,6 +34,12 @@ const colorLabels: Record<ExteriorColor, string> = {
   'glacier-blue': 'Glacier Blue',
   'lunar-white': 'Lunar White',
   'midnight-black': 'Midnight Black',
+};
+
+const statusBadgeClasses: Record<Order['status'], string> = {
+  APROVADO: 'bg-green-100 text-green-700',
+  REPROVADO: 'bg-red-100 text-red-700',
+  EM_ANALISE: 'bg-ambar-100 text-ambar-700',
 };
 
 const OrderLookup = () => {
@@ -83,7 +89,7 @@ const OrderLookup = () => {
           <CardContent>
             <form onSubmit={handleSearch} className="space-y-4">
               <div>
-                <Label htmlFor="order-id">Número do Pedido</Label>
+                <Label htmlFor="order-id">Código do Pedido</Label>
                 <Input
                   id="order-id"
                   data-testid="search-order-id"
@@ -145,16 +151,17 @@ const OrderLookup = () => {
                   </div>
                 </div>
                 <div
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${
-                    searchedOrder.status === 'APROVADO'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                  }`}
+                  role="status"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${statusBadgeClasses[searchedOrder.status]}`}
                 >
-                  {searchedOrder.status === 'APROVADO' ? (
+                  {searchedOrder.status === 'APROVADO' && (
                     <CheckCircle className="w-4 h-4" />
-                  ) : (
+                  )}
+                  {searchedOrder.status === 'REPROVADO' && (
                     <XCircle className="w-4 h-4" />
+                  )}
+                  {searchedOrder.status === 'EM_ANALISE' && (
+                    <Clock className="w-4 h-4 lucide-clock-icon" />
                   )}
                   {searchedOrder.status}
                 </div>
